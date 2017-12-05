@@ -1,7 +1,12 @@
 # coffeeMUD
 A tiny JAVA-based TinyMU* client
+
+# Description
+coffeeMUD is a lightweight, fast TinyMUD client writen in JAVA. Using coffeeMUD, you can connect to MUD servers, and have an enhanced experience with more features than your average telnet.
+
 # Status
-This program (barely) works, it still needs work. Most features won't work yet as they haven't been written.
+coffeeMUD is still in beta. Most features work, but there may be formatting issues here and there. There will be a graphical interface in the future.
+
 # License
 Copyright (c) 2017 _c0da_ (Victor Du)
 
