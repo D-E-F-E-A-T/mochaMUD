@@ -54,7 +54,6 @@ public class remoteTTY
 							mcpVer = Double.parseDouble(m.group(1));
 							System.out.println("\n Server MCP Version: " + mcpVer);
 							System.out.println("Sending ACK request to server...\n");
-							// send ACK request to MUCK server
 							pw.print(",V^iS.E47@@e}Jl\"yW\n" + 
 									" +");
 							pw.flush();
