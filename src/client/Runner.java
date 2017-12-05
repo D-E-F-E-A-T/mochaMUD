@@ -9,7 +9,8 @@ import java.util.StringTokenizer;
 public class Runner 
 {
 	/**
-	 * Copyright (c) 2017 _c0da_ (Victor Du)
+	 * 
+	 *  Copyright (c) 2017 _c0da_ (Victor Du)
 	 *
 	 *	Permission is hereby granted, free of charge, to any person obtaining a copy
 	 *	of this software and associated documentation files (the "Software"), to deal
@@ -39,6 +40,14 @@ public class Runner
 		sr = new ServerRunner(clock);
 		System.out.println("Welcome to coffee{MUD} v0.1 by Victor Du");
 		System.out.println("This software is open source and freely redistributable.");
+		System.out.println("\n");
+		System.out.println("              _____  _____               .____     _____   ____ ___________     ____. ");
+		System.out.println("  ____  _____/ ____\\/ ____\\____   ____   |   _|   /     \\ |    |   \\______ \\   |_   | ");
+		System.out.println("_/ ___\\/  _ \\   __\\\\   __\\/ __ \\_/ __ \\  |  |    /  \\ /  \\|    |   /|    |  \\    |  | ");
+		System.out.println("\\  \\__(  <_> )  |   |  | \\  ___/\\  ___/  |  |   /    Y    \\    |  / |    `   \\   |  | ");
+		System.out.println(" \\___  >____/|__|   |__|  \\___  >\\___  > |  |_  \\____|__  /______/ /_______  /  _|  | ");
+		System.out.println("     \\/                       \\/     \\/  |____|         \\/                 \\/  |____| ");
+		System.out.println("\n");
 		System.out.println("Try connecting to a server with the command: connect <serverIP> <serverport>");
 		System.out.println("Example command: \" connect furrymuck.com 8888 \" or \" connect batmud.bat.org 23 \"");
 		System.out.println("\n\n Please enter a command. \n\n");
