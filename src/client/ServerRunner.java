@@ -1,8 +1,9 @@
 package client;
 
+import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -11,8 +12,10 @@ public class ServerRunner
 	static Socket clientSock;
 	static Scanner getHIDInput;
 	static remoteTTY tty;
-	OutputStream os;
-	PrintWriter pw;
+	// PrintWriter pw;
+	static int ActivationCount = 0;
+	BufferedWriter bw;
+	DataOutputStream out;
 	public ServerRunner()
 	{
 		// Auto-generated class constructor
@@ -47,16 +50,30 @@ public class ServerRunner
 	public void beginComms() throws IOException
 	{
 		System.out.println("Beginning communications with server...");
-		os = clientSock.getOutputStream();
-		pw = new PrintWriter(os);
+		bw = new BufferedWriter(new OutputStreamWriter(clientSock.getOutputStream()));
 		for(;;)
 		{
 			try
 			{
 				System.out.print("\nSERVER>");
 				String s = getHIDInput.nextLine();
-				pw.print(s);
-				pw.flush();
+				if (s.matches("ragequit")) { break; }
+				if (ActivationCount >= 2)
+				{
+					bw.write(s);
+		            bw.newLine();
+		            bw.flush();
+		            ActivationCount++;
+				}
+				else
+				{
+					for(ActivationCount = 0; ActivationCount < 3; ActivationCount++)
+					{
+						bw.write(s);
+			            bw.newLine();
+			            bw.flush();
+					}
+				}
 			}
 			catch (Exception e)
 			{
