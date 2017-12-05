@@ -45,6 +45,7 @@ public class remoteTTY
 				}
 				while((receiveMessage = receiveRead.readLine()) != null)
 				{
+					f = !f;
 					if (receiveMessage.contains("#$#mcp version:"))
 					{
 						Matcher m = Pattern.compile("(?!=\\d\\.\\d\\.)([\\d.]+)").matcher(receiveMessage);
