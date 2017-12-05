@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.net.URI;
 import java.util.Scanner;
 
 public class ServerRunner
@@ -14,7 +15,9 @@ public class ServerRunner
 	static remoteTTY tty;
 	static double startTime;
 	static double mLoadTime;
+	static boolean isRun = false;
 	// PrintWriter pw;
+	static int commands = 0;
 	static int ActivationCount = 0;
 	BufferedWriter bw;
 	DataOutputStream out;
@@ -45,6 +48,7 @@ public class ServerRunner
 		    });  
 		    getinputstm.start();
 		    System.out.println("Loaded modules in " + (clock.elapsedTime() - startTime) + "s");
+		    isRun = true;
 			return true;
 		}
 		catch (Exception e)
@@ -64,8 +68,12 @@ public class ServerRunner
 			{
 				System.out.print("\nSERVER>");
 				String s = getHIDInput.nextLine();
-				if (s.matches("$ragequit")) { break; }
-				if (s.matches("$time"))
+				if (s.contains("!pause"))
+				{
+					System.out.println("Pausing game...");
+					break;
+				}
+				else if (s.contains("!time"))
 				{
 					double seconds = clock.getTime();
 					int getDays = (int) (seconds / 60 / 60 / 24);
@@ -81,20 +89,45 @@ public class ServerRunner
 					int getSecsU = (int) (uptime % 60);
 					System.out.println("Uptime: " + getDaysU + " d " + getHoursU + " hrs " + getMinsU + " mins " + getSecsU + " sec");
 				}
-				if (ActivationCount >= 2)
+				else if (s.contains("!stats"))
 				{
-					bw.write(s);
-		            bw.newLine();
-		            bw.flush();
-		            ActivationCount++;
+					System.out.println("========[ tiny{MUD} stats page ]========");
+					double uptime = clock.elapsedTime();
+					int getDaysU = (int) (uptime / 60 / 60 / 24);
+					int getHoursU = (int) ((uptime/60/60)%24);
+					int getMinsU = (int) ((uptime / 60)%60);
+					int getSecsU = (int) (uptime % 60);
+					System.out.println("IP     : " + clientSock.getRemoteSocketAddress());
+					System.out.println("Port   : " + clientSock.getPort());
+					System.out.println("Uptime : " + getDaysU + " d " + getHoursU + " hrs " + getMinsU + " mins " + getSecsU + " sec");
+					System.out.println("Moves  : " + commands);
+					System.out.println("========[ End of stats page ]========");
+				}
+				else if (s.contains("!pizza"))
+				{
+					// https://www.dominos.com/en/pages/order/
+					System.out.println("Ordering Domino's pizza for you...");
+					java.awt.Desktop.getDesktop().browse(new URI("https://www.dominos.com/en/pages/order/"));
 				}
 				else
 				{
-					for(ActivationCount = 0; ActivationCount < 3; ActivationCount++)
+					if (ActivationCount >= 2)
 					{
 						bw.write(s);
-			            bw.newLine();
-			            bw.flush();
+						bw.newLine();
+						bw.flush();
+						ActivationCount++;
+						commands++;
+					}
+					else
+					{
+						for(ActivationCount = 0; ActivationCount < 3; ActivationCount++)
+						{
+							bw.write(s);
+							bw.newLine();
+							bw.flush();
+						}
+						commands++;
 					}
 				}
 			}

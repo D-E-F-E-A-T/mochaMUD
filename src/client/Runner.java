@@ -29,6 +29,8 @@ public class Runner
 	 */
 	static ServerRunner sr;
 	static Stopwatch clock;
+	static Scanner lc;
+	@SuppressWarnings("static-access")
 	public static void main (String[] args)
 	{
 		clock = new Stopwatch();
@@ -38,7 +40,7 @@ public class Runner
 		System.out.println("Try connecting to a server with the command: connect <serverIP> <serverport>");
 		System.out.println("Example command: \" connect furrymuck.com 8888 \" or \" connect batmud.bat.org 23 \"");
 		System.out.println("\n\n Please enter a command. \n\n");
-		Scanner lc = new Scanner(System.in);
+		lc = new Scanner(System.in);
 		for(;;)
 		{
 			System.out.print("\nLOCAL>");
@@ -74,6 +76,18 @@ public class Runner
 				int getMinsU = (int) ((uptime / 60)%60);
 				int getSecsU = (int) (uptime % 60);
 				System.out.println("Uptime: " + getDaysU + " d " + getHoursU + " hrs " + getMinsU + " mins " + getSecsU + " sec");
+			}
+			if (input.matches("resume"))
+			{
+				if (sr.isRun)
+				{
+					try {
+						sr.beginComms();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 			}
 			if (input.matches("exit"))
 			{
