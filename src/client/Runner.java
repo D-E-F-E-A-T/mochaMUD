@@ -79,6 +79,7 @@ public class Runner
 			}
 			if (input.matches("time"))
 			{
+				System.out.println("========[ tiny{MUD} time page ]========");
 				double seconds = clock.getTime();
 				int getDays = (int) (seconds / 60 / 60 / 24);
 				int getHours = (int) ((seconds/60/60)%24);
@@ -92,6 +93,7 @@ public class Runner
 				int getMinsU = (int) ((uptime / 60)%60);
 				int getSecsU = (int) (uptime % 60);
 				System.out.println("Uptime: " + getDaysU + " d " + getHoursU + " hrs " + getMinsU + " mins " + getSecsU + " sec");
+				System.out.println("========[ End of time page ]========");
 			}
 			if (input.matches("stats"))
 			{
@@ -108,6 +110,10 @@ public class Runner
 					System.out.println("Uptime : " + getDaysU + " d " + getHoursU + " hrs " + getMinsU + " mins " + getSecsU + " sec");
 					System.out.println("Moves  : " + sr.commands);
 					System.out.println("========[ End of stats page ]========");
+				}
+				else
+				{
+					System.out.println("You haven't started a game yet!");
 				}
 			}
 			if (input.matches("pizza"))
@@ -131,6 +137,10 @@ public class Runner
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+				}
+				else
+				{
+					System.out.println("You haven't started a game yet!");
 				}
 			}
 			if (input.matches("exit"))

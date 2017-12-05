@@ -109,6 +109,13 @@ public class ServerRunner
 					System.out.println("Ordering Domino's pizza for you...");
 					java.awt.Desktop.getDesktop().browse(new URI("https://www.dominos.com/en/pages/order/"));
 				}
+				else if (s.contains("!disconnect"))
+				{
+					tty.isclosed = true;
+					tty.clientSock.close();
+					clientSock.close();
+					break;
+				}
 				else
 				{
 					if (ActivationCount >= 2)

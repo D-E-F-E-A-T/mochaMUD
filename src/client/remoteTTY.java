@@ -20,6 +20,7 @@ public class remoteTTY
 	OutputStream os;
 	PrintWriter pw;
 	double mcpVer = 0.0;
+	boolean isclosed = false;
 	public remoteTTY(Socket clientSock)
 	{
 		this.clientSock = clientSock;
@@ -36,6 +37,10 @@ public class remoteTTY
 		{
 			try
 			{	
+				if (isclosed)
+				{
+					break;
+				}
 				if (!f)
 				{
 					for(int cls = 0; cls < 42; cls++)
