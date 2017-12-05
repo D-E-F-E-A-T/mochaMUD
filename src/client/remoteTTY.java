@@ -29,12 +29,12 @@ public class remoteTTY
 		String receiveMessage;
 		os = clientSock.getOutputStream();
 		pw = new PrintWriter(os);
+		InputStream istream = clientSock.getInputStream();
+   	    BufferedReader receiveRead = new BufferedReader(new InputStreamReader(istream));
 		for(;;)
 		{
 			try
-			{
-				InputStream istream = clientSock.getInputStream();
-		   	    BufferedReader receiveRead = new BufferedReader(new InputStreamReader(istream));
+			{	
 				if ((receiveMessage = receiveRead.readLine()) != null)
 				{
 					if (receiveMessage.contains("#$#mcp version:"))

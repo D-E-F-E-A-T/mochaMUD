@@ -1,5 +1,6 @@
 package client;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -32,6 +33,8 @@ public class Runner
 		sr = new ServerRunner();
 		System.out.println("Welcome to coffee{MUD} v0.1 by Victor Du");
 		System.out.println("This software is open source and freely redistributable.");
+		System.out.println("Try connecting to a server with the command: connect <serverIP> <serverport>");
+		System.out.println("Example command: \" connect furrymuck.com 8888 \"");
 		System.out.println("\n\n Please enter a command. \n\n");
 		Scanner lc = new Scanner(System.in);
 		for(;;)
@@ -46,7 +49,12 @@ public class Runner
 				int port = Integer.parseInt(st.nextToken());
 				if (sr.connect(ip, port))
 				{
-					sr.beginComms();
+					try {
+						sr.beginComms();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 			if (input.matches("exit"))

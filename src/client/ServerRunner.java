@@ -1,6 +1,8 @@
 package client;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -9,6 +11,8 @@ public class ServerRunner
 	static Socket clientSock;
 	static Scanner getHIDInput;
 	static remoteTTY tty;
+	OutputStream os;
+	PrintWriter pw;
 	public ServerRunner()
 	{
 		// Auto-generated class constructor
@@ -40,15 +44,19 @@ public class ServerRunner
 			return false;
 		}
 	}
-	public void beginComms()
+	public void beginComms() throws IOException
 	{
 		System.out.println("Beginning communications with server...");
+		os = clientSock.getOutputStream();
+		pw = new PrintWriter(os);
 		for(;;)
 		{
 			try
 			{
 				System.out.print("\nSERVER>");
 				String s = getHIDInput.nextLine();
+				pw.print(s);
+				pw.flush();
 			}
 			catch (Exception e)
 			{
