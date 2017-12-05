@@ -1,6 +1,8 @@
 package client;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -43,6 +45,11 @@ public class Runner
 		lc = new Scanner(System.in);
 		for(;;)
 		{
+			if (shouldOrderPizza())
+			{
+				System.out.println("\n\n Whew, you've been playing for a while. Maybe take a break and order some pizza?");
+				System.out.println("To order pizza, run \" pizza \".\n\n");
+			}
 			System.out.print("\nLOCAL>");
 			String input = lc.nextLine();
 			if (input.contains("connect") && checkValidInput(input))
@@ -76,6 +83,34 @@ public class Runner
 				int getMinsU = (int) ((uptime / 60)%60);
 				int getSecsU = (int) (uptime % 60);
 				System.out.println("Uptime: " + getDaysU + " d " + getHoursU + " hrs " + getMinsU + " mins " + getSecsU + " sec");
+			}
+			if (input.matches("stats"))
+			{
+				if (sr.isRun)
+				{
+					System.out.println("========[ tiny{MUD} stats page ]========");
+					double uptime = clock.elapsedTime();
+					int getDaysU = (int) (uptime / 60 / 60 / 24);
+					int getHoursU = (int) ((uptime/60/60)%24);
+					int getMinsU = (int) ((uptime / 60)%60);
+					int getSecsU = (int) (uptime % 60);
+					System.out.println("IP     : " + sr.clientSock.getRemoteSocketAddress());
+					System.out.println("Port   : " + sr.clientSock.getPort());
+					System.out.println("Uptime : " + getDaysU + " d " + getHoursU + " hrs " + getMinsU + " mins " + getSecsU + " sec");
+					System.out.println("Moves  : " + sr.commands);
+					System.out.println("========[ End of stats page ]========");
+				}
+			}
+			if (input.matches("pizza"))
+			{
+				// https://www.dominos.com/en/pages/order/
+				System.out.println("Ordering Domino's pizza for you...");
+				try {
+					java.awt.Desktop.getDesktop().browse(new URI("https://www.dominos.com/en/pages/order/"));
+				} catch (IOException | URISyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			if (input.matches("resume"))
 			{
@@ -136,5 +171,15 @@ public class Runner
 	        return false;
 	    }
 	    return true;
+	}
+	public static boolean shouldOrderPizza()
+	{
+		double uptime = clock.elapsedTime();
+		int getHoursU = (int) ((uptime/60/60)%24);
+		if (getHoursU >= 1)
+		{
+			return true;
+		}
+		return false;
 	}
 }
