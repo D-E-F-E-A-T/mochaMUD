@@ -28,9 +28,11 @@ public class Runner
 	 *	SOFTWARE.
 	 */
 	static ServerRunner sr;
+	static Stopwatch clock;
 	public static void main (String[] args)
 	{
-		sr = new ServerRunner();
+		clock = new Stopwatch();
+		sr = new ServerRunner(clock);
 		System.out.println("Welcome to coffee{MUD} v0.1 by Victor Du");
 		System.out.println("This software is open source and freely redistributable.");
 		System.out.println("Try connecting to a server with the command: connect <serverIP> <serverport>");
@@ -56,6 +58,22 @@ public class Runner
 						e.printStackTrace();
 					}
 				}
+			}
+			if (input.matches("time"))
+			{
+				double seconds = clock.getTime();
+				int getDays = (int) (seconds / 60 / 60 / 24);
+				int getHours = (int) ((seconds/60/60)%24);
+				int getMins = (int) ((seconds / 60)%60);
+				int getSecs = (int) (seconds % 60);
+				//double getSeconds = seconds / 60 / 60 / 24
+				System.out.println("UTC: " + getDays + " d " + getHours + " hrs " + getMins + " mins " + getSecs + " sec");
+				double uptime = clock.elapsedTime();
+				int getDaysU = (int) (uptime / 60 / 60 / 24);
+				int getHoursU = (int) ((uptime/60/60)%24);
+				int getMinsU = (int) ((uptime / 60)%60);
+				int getSecsU = (int) (uptime % 60);
+				System.out.println("Uptime: " + getDaysU + " d " + getHoursU + " hrs " + getMinsU + " mins " + getSecsU + " sec");
 			}
 			if (input.matches("exit"))
 			{
