@@ -34,7 +34,7 @@ public class Runner
 		System.out.println("Welcome to coffee{MUD} v0.1 by Victor Du");
 		System.out.println("This software is open source and freely redistributable.");
 		System.out.println("Try connecting to a server with the command: connect <serverIP> <serverport>");
-		System.out.println("Example command: \" connect furrymuck.com 8888 \"");
+		System.out.println("Example command: \" connect furrymuck.com 8888 \" or \" connect batmud.bat.org 23 \"");
 		System.out.println("\n\n Please enter a command. \n\n");
 		Scanner lc = new Scanner(System.in);
 		for(;;)
