@@ -143,6 +143,106 @@ public class Runner
 					System.out.println("You haven't started a game yet!");
 				}
 			}
+			if (input.contains("help"))
+			{
+				String option = input.substring(4);
+				System.out.println(option);
+				if (option.matches(""))
+				{
+					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("help - usage : help <command>");
+					System.out.println("==========[ End of help page ]=========");
+				}
+				if (option.contains("help"))
+				{
+					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("NAME");
+					System.out.println("help - a command to run for help on a command.");
+					System.out.println("SYNOPSIS");
+					System.out.println("help [command]");
+					System.out.println("==========[ End of help page ]=========");
+				}
+				if (option.contains("connect"))
+				{
+					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("NAME");
+					System.out.println("connect - connect to a MUD server.");
+					System.out.println("SYNOPSIS");
+					System.out.println("connect [IP of server] [port of server]");
+					System.out.println("DESCRIPTION");
+					System.out.println("This command connects to a MU* server. The server IP field supports IPv4 and IPv6 and the port supports TLS tunneling.");
+					System.out.println("example : \" connect furrymuck.com 8888 \"");
+					System.out.println("==========[ End of help page ]=========");
+				}
+				if (option.matches("time"))
+				{
+					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("NAME");
+					System.out.println("time - show uptime of program");
+					System.out.println("SYNOPSIS");
+					System.out.println("usage : time");
+					System.out.println("DESCRIPTION");
+					System.out.println("This command shows the amount of time tiny{MUD} has been running for, as well as\n the current UTC time.");
+					System.out.println("==========[ End of help page ]=========");
+				}
+				if (option.matches("stats"))
+				{
+					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("NAME");
+					System.out.println("stats - show statistics of current game");
+					System.out.println("SYNOPSIS");
+					System.out.println("usage : stats");
+					System.out.println("DESCRIPTION");
+					System.out.println("This command shows various user/client-side statistics for tiny{MUD}. This includes the uptime of tiny{MUD}, commands run\n and current server.");
+					System.out.println("==========[ End of help page ]=========");
+				}
+				if (option.contains("pizza"))
+				{
+					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("NAME");
+					System.out.println("pizza - order pizza mid-game");
+					System.out.println("SYNOPSIS");
+					System.out.println("usage : pizza");
+					System.out.println("DESCRIPTION");
+					System.out.println("This command opens an ordering menu for Domino's pizza, so you can order pizza for pick-up.");
+					System.out.println("==========[ End of help page ]=========");
+				}
+				if (option.contains("pause"))
+				{
+					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("NAME");
+					System.out.println("!pause - pause your MUD session");
+					System.out.println("SYNOPSIS");
+					System.out.println("usage : !pause");
+					System.out.println("DESCRIPTION");
+					System.out.println("This command pauses your game, not disconnecting and points you back to the LOCAL menu.");
+					System.out.println("==========[ End of help page ]=========");
+				}
+				if (option.contains("disconnect"))
+				{
+					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("NAME");
+					System.out.println("!disconnect - disconnect from the MUD server.");
+					System.out.println("SYNOPSIS");
+					System.out.println("usage : !disconnect");
+					System.out.println("DESCRIPTION");
+					System.out.println("This command disconnects you from the MUD server and points you back to the LOCAL menu.");
+					System.out.println("==========[ End of help page ]=========");
+				}
+				if (option.contains("exit"))
+				{
+					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("NAME");
+					System.out.println("exit - close tiny{MUD}");
+					System.out.println("SYNOPSIS");
+					System.out.println("usage : exit");
+					System.out.println("DESCRIPTION");
+					System.out.println("This command exits tiny{MUD}.");
+					System.out.println("Examples: ");
+					System.out.println("Is someone hurting your feelings? Use this command to quit the game!");
+					System.out.println("==========[ End of help page ]=========");
+				}
+			}
 			if (input.matches("exit"))
 			{
 				System.out.println("Exiting coffee{MUD}...");
