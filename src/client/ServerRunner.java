@@ -240,17 +240,37 @@ public class ServerRunner
 					{
 						for(;;)
 						{
-							s = br.readLine();
-							if (s == null || s.contains("["))
+							// s = br.readLine();
+							System.out.println(s);
+							if (s.contains("&"))
 							{
-								ff = true;
-								break;
+								StringTokenizer parser = new StringTokenizer(s);
+								parser.nextToken();
+								String delayTString = parser.nextToken();
+								try
+								{
+									int tempDelay = Integer.parseInt(delayTString);
+									System.out.println("Delaying " + tempDelay + " ms");
+									Thread.sleep(tempDelay);
+								} 
+								catch (Exception e)
+								{
+									System.err.println("Couldn't parse delay from macro file.");
+								}
 							}
 							else
 							{
-								bw.write(s);
-								bw.newLine();
-								bw.flush();
+								if (s == null || s.contains("["))
+								{
+									ff = true;
+									break;
+								}
+								else
+								{	
+									bw.write(s);
+									bw.newLine();
+									bw.flush();
+								}
 							}
 						}
 					}

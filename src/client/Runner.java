@@ -227,6 +227,7 @@ public class Runner
 					System.out.println("time");
 					System.out.println("!pause");
 					System.out.println("!disconnect");
+					System.out.println("resume");
 					System.out.println("pizza");
 					System.out.println("!pizza");
 					System.out.println("exit");
@@ -284,7 +285,18 @@ public class Runner
 					System.out.println("SYNOPSIS");
 					System.out.println("usage : time");
 					System.out.println("DESCRIPTION");
-					System.out.println("This command shows the amount of time tiny{MUD} has been running for, as well as\n the current UTC time.");
+					System.out.println("This command shows the amount of time coffee{MUD} has been running for, as well as\n the current UTC time.");
+					System.out.println("==========[ End of help page ]=========");
+				}
+				if (option.matches("resume"))
+				{
+					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("NAME");
+					System.out.println("resume - resume a paused game");
+					System.out.println("SYNOPSIS");
+					System.out.println("usage : resume");
+					System.out.println("DESCRIPTION");
+					System.out.println("This command will resume a previously paused game in coffee{MUD}.");
 					System.out.println("==========[ End of help page ]=========");
 				}
 				if (option.matches("stats"))
@@ -295,7 +307,7 @@ public class Runner
 					System.out.println("SYNOPSIS");
 					System.out.println("usage : stats");
 					System.out.println("DESCRIPTION");
-					System.out.println("This command shows various user/client-side statistics for tiny{MUD}. This includes the uptime of tiny{MUD}, commands run\n and current server.");
+					System.out.println("This command shows various user/client-side statistics for cofffee{MUD}. This includes the uptime of coffee{MUD}, commands run\n and current server.");
 					System.out.println("==========[ End of help page ]=========");
 				}
 				if (option.matches("dice"))
