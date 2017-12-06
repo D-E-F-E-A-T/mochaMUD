@@ -112,15 +112,15 @@ public class ServerRunner
 				}
 				else if (s.contains("!dice"))
 				{
-					Random d2 = new Random(2);
-					Random d6 = new Random(6);
-					Random d10 = new Random(10);
-					Random d20 = new Random(20);
+					Random d2 = new Random();
+					Random d6 = new Random();
+					Random d10 = new Random();
+					Random d20 = new Random();
 					System.out.println("Rolling dice for you...");
-					System.out.println("D2: " + (d2.nextInt()+1));
-					System.out.println("D6: " + (d6.nextInt()+1));
-					System.out.println("D10: " + (d10.nextInt()+1));
-					System.out.println("D20: " + (d20.nextInt()+1));
+					System.out.println("D2: " + (d2.nextInt(2)+1));
+					System.out.println("D6: " + (d6.nextInt(6)+1));
+					System.out.println("D10: " + (d10.nextInt(10)+1));
+					System.out.println("D20: " + (d20.nextInt(20)+1));
 				}
 				else if (s.contains("!disconnect"))
 				{
