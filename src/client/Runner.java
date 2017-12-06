@@ -448,13 +448,13 @@ public class Runner
 	{
 		String path = Runner.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		String decodedPath = URLDecoder.decode(path, "UTF-8");
-		File f = new File(decodedPath + "favorites.ini");
+		File f = new File(decodedPath + "/favorites.ini");
 		if (!f.exists())
 		{
 			f.createNewFile();
 		}
-		System.out.println("Loading saved servers from: " + decodedPath + "favorites.ini");
-		BufferedReader br = new BufferedReader(new FileReader(decodedPath + "favorites.ini"));
+		System.out.println("Loading saved servers from: " + decodedPath + "/favorites.ini");
+		BufferedReader br = new BufferedReader(new FileReader(decodedPath + "/favorites.ini"));
 		for(;;)
 		{
 			String s = br.readLine();
@@ -473,7 +473,7 @@ public class Runner
 			System.out.println("Saved servers: ");
 			for (int i = 0; i < favorites.size(); i++)
 			{
-				System.out.println((i+1) + ") "+ favorites.get(i));
+				System.out.println((i) + ") "+ favorites.get(i));
 			}
 			System.out.println("\n");
 		}
@@ -484,7 +484,7 @@ public class Runner
 		{
 			String path = Runner.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 			String decodedPath = URLDecoder.decode(path, "UTF-8");
-			PrintWriter pw = new PrintWriter(new FileWriter(decodedPath + "favorites.ini", true));
+			PrintWriter pw = new PrintWriter(new FileWriter(decodedPath + "/favorites.ini", true));
 			if (!favorites.contains(ip + " " + port))
 			{
 				System.out.println("You haven't visited this server before. Would you like to save it for quick access later? (Y/N)");

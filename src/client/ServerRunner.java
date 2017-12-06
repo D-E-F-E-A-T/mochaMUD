@@ -1,13 +1,20 @@
 package client;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.Socket;
 import java.net.URI;
+import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class ServerRunner
 {
@@ -23,6 +30,7 @@ public class ServerRunner
 	BufferedWriter bw;
 	DataOutputStream out;
 	Stopwatch clock;
+	ArrayList<String> macros = new ArrayList<>();
 	public ServerRunner(Stopwatch clock)
 	{
 		// Auto-generated class constructor
@@ -122,6 +130,21 @@ public class ServerRunner
 					System.out.println("D10: " + (d10.nextInt(10)+1));
 					System.out.println("D20: " + (d20.nextInt(20)+1));
 				}
+				else if (s.contains("!macro"))
+				{
+					StringTokenizer st = new StringTokenizer(s);
+					st.nextToken();
+					String args = st.nextToken();
+					if (args == null)
+					{
+						System.err.println("No macro setting equipped. Usage: !macro [macro #]");
+					}
+					else
+					{
+						int id = Integer.parseInt(args);
+						loadMacros(id);
+					}
+				}
 				else if (s.contains("!disconnect"))
 				{
 					tty.isclosed = true;
@@ -157,6 +180,71 @@ public class ServerRunner
 				e.printStackTrace();
 				break;
 			}
+		}
+	}
+	public void loadMacros(int macroID) throws IOException
+	{
+		/**
+		 * Macros can be called with the command: !macro <macro #>
+		 * 
+		 * A macro file should come in the following form:
+		 * Name: coffeeMacros.ini
+		 * Location: Folder of JAR File
+		 * 
+		 * ===== BEGIN SAMPLE MACRO FILE =====
+		 * 
+		 * [Macro#]
+		 * sample command here
+		 * other sample command here
+		 * 
+		 * [Macro#]
+		 * connect guest guest
+		 * WHO
+		 * 
+		 * ====== END SAMPLE MACRO FILE ======
+		 * 
+		 */
+		try
+		{
+			System.out.println("Running macro "+ macroID + "...");
+			String path = Runner.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+			String decodedPath = URLDecoder.decode(path, "UTF-8");
+			File f = new File(decodedPath + "/coffeeMacros.ini");
+			if (!f.exists())
+			{
+				f.createNewFile();
+			}
+			boolean ff = false;
+			BufferedReader br = new BufferedReader(new FileReader(decodedPath + "/coffeeMacros.ini"));
+			for(;;)
+			{
+				if (ff)
+				{
+					break;
+				}
+				String s = br.readLine();
+				if (s == null)
+				{
+					break;
+				}
+				if (Integer.parseInt(s.substring(s.indexOf("[")+1, s.indexOf("]"))) == macroID)
+				{
+					for(;;)
+					{
+						s = br.readLine();
+						if (s == null || s.contains("["))
+						{
+							ff = true;
+							break;
+						}
+					}
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("Error loading macros: "+ e);
+			e.printStackTrace();
 		}
 	}
 }
