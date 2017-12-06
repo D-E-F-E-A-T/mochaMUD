@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.URI;
+import java.util.Random;
 import java.util.Scanner;
 
 public class ServerRunner
@@ -108,6 +109,18 @@ public class ServerRunner
 					// https://www.dominos.com/en/pages/order/
 					System.out.println("Ordering Domino's pizza for you...");
 					java.awt.Desktop.getDesktop().browse(new URI("https://www.dominos.com/en/pages/order/"));
+				}
+				else if (s.contains("!dice"))
+				{
+					Random d2 = new Random(2);
+					Random d6 = new Random(6);
+					Random d10 = new Random(10);
+					Random d20 = new Random(20);
+					System.out.println("Rolling dice for you...");
+					System.out.println("D2: " + (d2.nextInt()+1));
+					System.out.println("D6: " + (d6.nextInt()+1));
+					System.out.println("D10: " + (d10.nextInt()+1));
+					System.out.println("D20: " + (d20.nextInt()+1));
 				}
 				else if (s.contains("!disconnect"))
 				{
