@@ -66,7 +66,7 @@ public class ServerRunner
 		{
 			try
 			{
-				System.out.print("\nSERVER>");
+				System.out.print("\n\nSERVER>");
 				String s = getHIDInput.nextLine();
 				if (s.contains("!pause"))
 				{

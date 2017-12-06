@@ -1,8 +1,19 @@
 package client;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -33,6 +44,7 @@ public class Runner
 	static ServerRunner sr;
 	static Stopwatch clock;
 	static Scanner lc;
+	static ArrayList<String> favorites = new ArrayList<String>();
 	@SuppressWarnings("static-access")
 	public static void main (String[] args)
 	{
@@ -46,11 +58,18 @@ public class Runner
 		System.out.println("_/ ___\\/  _ \\   __\\\\   __\\/ __ \\_/ __ \\  |  |    /  \\ /  \\|    |   /|    |  \\    |  | ");
 		System.out.println("\\  \\__(  <_> )  |   |  | \\  ___/\\  ___/  |  |   /    Y    \\    |  / |    `   \\   |  | ");
 		System.out.println(" \\___  >____/|__|   |__|  \\___  >\\___  > |  |_  \\____|__  /______/ /_______  /  _|  | ");
-		System.out.println("     \\/                       \\/     \\/  |____|         \\/                 \\/  |____| ");
+		System.out.println("     \\/                       \\/     \\/  |____|         \\/      v0.1b      \\/  |____| ");
 		System.out.println("\n");
 		System.out.println("Try connecting to a server with the command: connect <serverIP> <serverport>");
 		System.out.println("Example command: \" connect furrymuck.com 8888 \" or \" connect batmud.bat.org 23 \"");
 		System.out.println("\n\n Please enter a command. \n\n");
+		try {
+			loadFavorites();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		showFavorites();
 		lc = new Scanner(System.in);
 		for(;;)
 		{
@@ -67,6 +86,12 @@ public class Runner
 				st.nextToken();
 				String ip = st.nextToken();
 				int port = Integer.parseInt(st.nextToken());
+				try {
+					addFavorite(ip, port);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				if (sr.connect(ip, port))
 				{
 					try {
@@ -74,6 +99,27 @@ public class Runner
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+					}
+				}
+			}
+			if (input.contains("goto") && checkValidInput(input))
+			{
+				StringTokenizer st = new StringTokenizer(input);
+				st.nextToken();
+				int id = Integer.parseInt(st.nextToken());
+				if (!(id >= favorites.size()))
+				{
+					StringTokenizer st2 = new StringTokenizer(favorites.get(id-1));
+					String ip = st2.nextToken();
+					int port = Integer.parseInt(st2.nextToken());
+					if (sr.connect(ip, port))
+					{
+						try {
+							sr.beginComms();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				}
 			}
@@ -150,7 +196,7 @@ public class Runner
 				if (option.matches(""))
 				{
 					System.out.println("========[ tiny{MUD} help page ]========");
-					System.out.println("help - usage : help <command>");
+					System.out.println("help - usage : help [command]");
 					System.out.println("==========[ End of help page ]=========");
 				}
 				if (option.contains("help"))
@@ -160,6 +206,17 @@ public class Runner
 					System.out.println("help - a command to run for help on a command.");
 					System.out.println("SYNOPSIS");
 					System.out.println("help [command]");
+					System.out.println("==========[ End of help page ]=========");
+				}
+				if (option.contains("goto"))
+				{
+					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("NAME");
+					System.out.println("goto - connect to a saved server");
+					System.out.println("SYNOPSIS");
+					System.out.println("goto [server ID]");
+					System.out.println("DESCRIPTION");
+					System.out.println("This command connects to a specified MUD server with a set ID.");
 					System.out.println("==========[ End of help page ]=========");
 				}
 				if (option.contains("connect"))
@@ -273,6 +330,25 @@ public class Runner
 				return false;
 			}
 		}
+		if (str.contains("goto"))
+		{
+			try
+			{
+				st.nextToken();
+				if (!isInteger(st.nextToken()))
+				{
+					System.out.println("You didn't enter a favorite number!");
+					System.out.println("goto usage : goto <favorite ID>");
+					return false;
+				}
+			} 
+			catch (Exception e)
+			{
+				System.out.println("You didn't enter a favorite number!");
+				System.out.println("goto usage : goto <favorite ID>");
+				return false;
+			}
+		}
 		return true;
 	}
 	public static boolean isInteger(String s)
@@ -300,5 +376,59 @@ public class Runner
 			return true;
 		}
 		return false;
+	}
+	public static void loadFavorites() throws UnsupportedEncodingException, IOException
+	{
+		String path = Runner.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+		String decodedPath = URLDecoder.decode(path, "UTF-8");
+		File f = new File(decodedPath + "favorites.ini");
+		if (!f.exists())
+		{
+			f.createNewFile();
+		}
+		System.out.println("Loading saved servers from: " + decodedPath + "favorites.ini");
+		BufferedReader br = new BufferedReader(new FileReader(decodedPath + "favorites.ini"));
+		for(;;)
+		{
+			String s = br.readLine();
+			if (s == null)
+			{
+				break;
+			}
+			favorites.add(s);
+		}
+		br.close();
+	}
+	public static void showFavorites()
+	{
+		if (favorites.size() != 0)
+		{
+			System.out.println("Saved servers: ");
+			for (int i = 0; i < favorites.size(); i++)
+			{
+				System.out.println((i+1) + ") "+ favorites.get(i));
+			}
+			System.out.println("\n");
+		}
+	}
+	public static void addFavorite(String ip, int port) throws IOException
+	{
+		try
+		{
+			String path = Runner.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+			String decodedPath = URLDecoder.decode(path, "UTF-8");
+			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(decodedPath + "favorites.ini")));
+			if (!favorites.contains(ip + " " + port))
+			{
+				System.out.println("You haven't visited this server before. Would you like to save it for quick access later? (Y/N)");
+				String ch = lc.nextLine();
+				if (ch.contains("y") || ch.contains("Y")) { favorites.add(ip + " " + port);  pw.println(ip + " " + port); pw.close(); System.out.println("Server saved.");}	
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("addFavorite encountered an exception: " + e);
+			e.printStackTrace();
+		}
 	}
 }
