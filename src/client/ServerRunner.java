@@ -222,6 +222,7 @@ public class ServerRunner
 				f.createNewFile();
 			}
 			boolean ff = false;
+			boolean disconnectInMacro = false;
 			BufferedReader br = new BufferedReader(new FileReader(decodedPath + "coffeeMacros.ini"));
 			for(;;)
 			{
@@ -240,9 +241,9 @@ public class ServerRunner
 					{
 						for(;;)
 						{
-							// s = br.readLine();
-							System.out.println(s);
-							if (s.contains("&"))
+							s = br.readLine();
+							// System.out.println(s);
+							if (s.contains("&delay"))
 							{
 								StringTokenizer parser = new StringTokenizer(s);
 								parser.nextToken();
@@ -257,6 +258,21 @@ public class ServerRunner
 								{
 									System.err.println("Couldn't parse delay from macro file.");
 								}
+							}
+							else if (s.contains("&print"))
+							{
+								StringTokenizer parser = new StringTokenizer(s);
+								parser.nextToken();
+								String toPrint = parser.nextToken();
+								System.out.println(toPrint);
+							}
+							else if (s.contains("&disconnect"))
+							{
+								tty.isclosed = true;
+								tty.clientSock.close();
+								clientSock.close();
+								disconnectInMacro = true;
+								break;
 							}
 							else
 							{
@@ -274,6 +290,11 @@ public class ServerRunner
 							}
 						}
 					}
+				}
+				if (disconnectInMacro)
+				{
+					disconnectInMacro = false;
+					break;
 				}
 			}
 		}
