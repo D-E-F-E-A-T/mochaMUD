@@ -136,6 +136,13 @@ public class Runner
 					favorites.remove(id);
 				}
 			}
+			if (input.matches("clear"))
+			{
+				for (int i = 0; i < 69; i++)
+				{
+					System.out.println("\n");
+				}
+			}
 			if (input.matches("time"))
 			{
 				System.out.println("========[ tiny{MUD} time page ]========");
@@ -215,6 +222,7 @@ public class Runner
 					System.out.println("connect");
 					System.out.println("goto");
 					System.out.println("delserv");
+					System.out.println("clear");
 					System.out.println("stats");
 					System.out.println("time");
 					System.out.println("!pause");
@@ -321,6 +329,17 @@ public class Runner
 					System.out.println("usage : !pause");
 					System.out.println("DESCRIPTION");
 					System.out.println("This command pauses your game, not disconnecting and points you back to the LOCAL menu.");
+					System.out.println("==========[ End of help page ]=========");
+				}
+				if (option.contains("clear"))
+				{
+					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("NAME");
+					System.out.println("!clear - clear screen");
+					System.out.println("SYNOPSIS");
+					System.out.println("usage : !clear");
+					System.out.println("DESCRIPTION");
+					System.out.println("This command clears your screen.");
 					System.out.println("==========[ End of help page ]=========");
 				}
 				if (option.contains("disconnect"))

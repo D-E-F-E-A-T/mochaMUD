@@ -145,6 +145,13 @@ public class ServerRunner
 						loadMacros(id);
 					}
 				}
+				else if (s.contains("!clear"))
+				{
+					for (int i = 0; i < 69; i++)
+					{
+						System.out.println("\n");
+					}
+				}
 				else if (s.contains("!disconnect"))
 				{
 					tty.isclosed = true;
