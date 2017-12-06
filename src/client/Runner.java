@@ -473,7 +473,7 @@ public class Runner
 		{
 			String path = Runner.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 			String decodedPath = URLDecoder.decode(path, "UTF-8");
-			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(decodedPath + "favorites.ini")));
+			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(decodedPath + "favorites.ini")), true);
 			if (!favorites.contains(ip + " " + port))
 			{
 				System.out.println("You haven't visited this server before. Would you like to save it for quick access later? (Y/N)");
