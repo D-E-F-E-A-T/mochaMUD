@@ -32,7 +32,6 @@ public class remoteTTY
 		pw = new PrintWriter(os);
 		InputStream istream = clientSock.getInputStream();
    	    BufferedReader receiveRead = new BufferedReader(new InputStreamReader(istream));
-   	    boolean f = false;
 		for(;;)
 		{
 			try
@@ -41,16 +40,8 @@ public class remoteTTY
 				{
 					break;
 				}
-				if (!f)
-				{
-					for(int cls = 0; cls < 42; cls++)
-					{
-						System.out.println("~");
-					}
-				}
 				while((receiveMessage = receiveRead.readLine()) != null)
 				{
-					f = !f;
 					if (receiveMessage.contains("#$#mcp version:"))
 					{
 						Matcher m = Pattern.compile("(?!=\\d\\.\\d\\.)([\\d.]+)").matcher(receiveMessage);
@@ -69,6 +60,7 @@ public class remoteTTY
 						System.out.println(receiveMessage);
 					}
 				}
+
 			}
 			catch (Exception e)
 			{
