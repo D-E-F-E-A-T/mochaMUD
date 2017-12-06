@@ -290,6 +290,17 @@ public class Runner
 					System.out.println("This command shows various user/client-side statistics for tiny{MUD}. This includes the uptime of tiny{MUD}, commands run\n and current server.");
 					System.out.println("==========[ End of help page ]=========");
 				}
+				if (option.matches("dice"))
+				{
+					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("NAME");
+					System.out.println("!dice - roll a pair of virtual dice");
+					System.out.println("SYNOPSIS");
+					System.out.println("usage : !dice");
+					System.out.println("DESCRIPTION");
+					System.out.println("This command rolls multiple dice: a D2, D6, D10 and D20.");
+					System.out.println("==========[ End of help page ]=========");
+				}
 				if (option.contains("pizza"))
 				{
 					System.out.println("========[ tiny{MUD} help page ]========");
