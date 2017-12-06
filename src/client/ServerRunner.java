@@ -209,7 +209,7 @@ public class ServerRunner
 			System.out.println("Running macro "+ macroID + "...");
 			String path = Runner.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 			String decodedPath = URLDecoder.decode(path, "UTF-8");
-			File f = new File(decodedPath + "coffeeMacros.ini");
+			File f = new File(path + "coffeeMacros.ini");
 			if (!f.exists())
 			{
 				f.createNewFile();
@@ -227,15 +227,24 @@ public class ServerRunner
 				{
 					break;
 				}
-				if (Integer.parseInt(s.substring(s.indexOf("[")+1, s.indexOf("]"))) == macroID)
+				if (s.contains("["))
 				{
-					for(;;)
+					if (Integer.parseInt(s.substring(s.indexOf("[")+1, s.indexOf("]"))) == macroID)
 					{
-						s = br.readLine();
-						if (s == null || s.contains("["))
+						for(;;)
 						{
-							ff = true;
-							break;
+							s = br.readLine();
+							if (s == null || s.contains("["))
+							{
+								ff = true;
+								break;
+							}
+							else
+							{
+								bw.write(s);
+								bw.newLine();
+								bw.flush();
+							}
 						}
 					}
 				}
