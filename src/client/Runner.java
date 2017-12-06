@@ -109,7 +109,7 @@ public class Runner
 				int id = Integer.parseInt(st.nextToken());
 				if (!(id >= favorites.size()))
 				{
-					StringTokenizer st2 = new StringTokenizer(favorites.get(id-1));
+					StringTokenizer st2 = new StringTokenizer(favorites.get(id));
 					String ip = st2.nextToken();
 					int port = Integer.parseInt(st2.nextToken());
 					if (sr.connect(ip, port))
@@ -121,6 +121,19 @@ public class Runner
 							e.printStackTrace();
 						}
 					}
+				}
+			}
+			if (input.contains("delserv") && checkValidInput(input))
+			{
+				StringTokenizer st = new StringTokenizer(input);
+				st.nextToken();
+				int id = Integer.parseInt(st.nextToken());
+				if (!(id >= favorites.size()))
+				{
+					StringTokenizer st2 = new StringTokenizer(favorites.get(id));
+					String ip = st2.nextToken();
+					int port = Integer.parseInt(st2.nextToken());
+					favorites.remove(id);
 				}
 			}
 			if (input.matches("time"))
@@ -197,6 +210,19 @@ public class Runner
 				{
 					System.out.println("========[ tiny{MUD} help page ]========");
 					System.out.println("help - usage : help [command]");
+					System.out.println("        [  LIST OF COMMANDS   ]        ");
+					System.out.println("help");
+					System.out.println("connect");
+					System.out.println("goto");
+					System.out.println("delserv");
+					System.out.println("stats");
+					System.out.println("time");
+					System.out.println("!pause");
+					System.out.println("!disconnect");
+					System.out.println("pizza");
+					System.out.println("!pizza");
+					System.out.println("exit");
+					System.out.println("        [ END LIST OF COMMANDS ]        ");
 					System.out.println("==========[ End of help page ]=========");
 				}
 				if (option.contains("help"))
@@ -217,6 +243,17 @@ public class Runner
 					System.out.println("goto [server ID]");
 					System.out.println("DESCRIPTION");
 					System.out.println("This command connects to a specified MUD server with a set ID.");
+					System.out.println("==========[ End of help page ]=========");
+				}
+				if (option.contains("delserv"))
+				{
+					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("NAME");
+					System.out.println("delserv - delete a saved server");
+					System.out.println("SYNOPSIS");
+					System.out.println("delserv [server ID]");
+					System.out.println("DESCRIPTION");
+					System.out.println("This command deletes a saved MUD server on tiny{MUD}.");
 					System.out.println("==========[ End of help page ]=========");
 				}
 				if (option.contains("connect"))
@@ -346,6 +383,25 @@ public class Runner
 			{
 				System.out.println("You didn't enter a favorite number!");
 				System.out.println("goto usage : goto <favorite ID>");
+				return false;
+			}
+		}
+		if (str.contains("delserv"))
+		{
+			try
+			{
+				st.nextToken();
+				if (!isInteger(st.nextToken()))
+				{
+					System.out.println("You didn't enter a number to remove!");
+					System.out.println("delserv usage : delserv <favorite ID>");
+					return false;
+				}
+			} 
+			catch (Exception e)
+			{
+				System.out.println("You didn't enter a number to remove!");
+				System.out.println("delserv usage : delserv <favorite ID>");
 				return false;
 			}
 		}
