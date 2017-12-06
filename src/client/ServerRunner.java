@@ -26,7 +26,6 @@ public class ServerRunner
 	static boolean isRun = false;
 	// PrintWriter pw;
 	static int commands = 0;
-	static int ActivationCount = 0;
 	BufferedWriter bw;
 	DataOutputStream out;
 	Stopwatch clock;
@@ -160,24 +159,10 @@ public class ServerRunner
 				}
 				else
 				{
-					if (ActivationCount >= 2)
-					{
 						bw.write(s);
 						bw.newLine();
 						bw.flush();
-						ActivationCount++;
 						commands++;
-					}
-					else
-					{
-						for(ActivationCount = 0; ActivationCount < 3; ActivationCount++)
-						{
-							bw.write(s);
-							bw.newLine();
-							bw.flush();
-						}
-						commands++;
-					}
 				}
 			}
 			catch (Exception e)

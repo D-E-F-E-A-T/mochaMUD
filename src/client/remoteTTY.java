@@ -1,10 +1,12 @@
 package client;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
@@ -18,7 +20,7 @@ public class remoteTTY
 	StringTokenizer st;
 	Scanner sc;
 	OutputStream os;
-	PrintWriter pw;
+	BufferedWriter bw;
 	double mcpVer = 0.0;
 	boolean isclosed = false;
 	public remoteTTY(Socket clientSock)
@@ -29,7 +31,7 @@ public class remoteTTY
 	{
 		String receiveMessage;
 		os = clientSock.getOutputStream();
-		pw = new PrintWriter(os);
+		bw = new BufferedWriter(new OutputStreamWriter(clientSock.getOutputStream()));
 		InputStream istream = clientSock.getInputStream();
    	    BufferedReader receiveRead = new BufferedReader(new InputStreamReader(istream));
 		for(;;)
@@ -50,9 +52,10 @@ public class remoteTTY
 							mcpVer = Double.parseDouble(m.group(1));
 							System.out.println("\n Server MCP Version: " + mcpVer);
 							System.out.println("Sending ACK request to server...\n");
-							pw.print(",V^iS.E47@@e}Jl\"yW\n" + 
+							bw.write(",V^iS.E47@@e}Jl\"yW\n" + 
 									" +");
-							pw.flush();
+							bw.newLine();
+							bw.flush();
 						}
 					}
 					else
