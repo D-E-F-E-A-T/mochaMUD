@@ -12,7 +12,11 @@ coffeeMUD has a variety of features to enhance your MUD experience. Features inc
 - Programmable macro commands
 - Saved favorite servers
 - Dice rolling in-game
+- anti-AFK features
+- VT220 emulation in Telnet formatting, support for UTF-8 charset.
 - Support for various types of encoding, color text!
+- Support for special characters, such as Simplified Chinese.
+- Fast as lightening!
 - Multi-platform support (Windows, Mac OS X, Linux)
 - Order pizza from coffeeMUD!
 
