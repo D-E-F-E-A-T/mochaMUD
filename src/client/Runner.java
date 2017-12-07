@@ -13,6 +13,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -50,16 +51,51 @@ public class Runner
 	{
 		clock = new Stopwatch();
 		sr = new ServerRunner(clock);
-		System.out.println("Welcome to coffee{MUD} v0.1 (C) Victor Du");
+		System.out.println("Welcome to coffee{MUD} v0.2 (C) Victor Du");
 		System.out.println("This software is open source and freely redistributable.");
-		System.out.println("\n");
-		System.out.println("              _____  _____               .____     _____   ____ ___________     ____. ");
-		System.out.println("  ____  _____/ ____\\/ ____\\____   ____   |   _|   /     \\ |    |   \\______ \\   |_   | ");
-		System.out.println("_/ ___\\/  _ \\   __\\\\   __\\/ __ \\_/ __ \\  |  |    /  \\ /  \\|    |   /|    |  \\    |  | ");
-		System.out.println("\\  \\__(  <_> )  |   |  | \\  ___/\\  ___/  |  |   /    Y    \\    |  / |    `   \\   |  | ");
-		System.out.println(" \\___  >____/|__|   |__|  \\___  >\\___  > |  |_  \\____|__  /______/ /_______  /  _|  | ");
-		System.out.println("     \\/                       \\/     \\/  |____|         \\/      v0.1b      \\/  |____| ");
-		System.out.println("\n");
+		if (getHoliday() == 0)
+		{
+			// draw default banner
+			System.out.println("\n");
+			System.out.println("              _____  _____               .____     _____   ____ ___________     ____. ");
+			System.out.println("  ____  _____/ ____\\/ ____\\____   ____   |   _|   /     \\ |    |   \\______ \\   |_   | ");
+			System.out.println("_/ ___\\/  _ \\   __\\\\   __\\/ __ \\_/ __ \\  |  |    /  \\ /  \\|    |   /|    |  \\    |  | ");
+			System.out.println("\\  \\__(  <_> )  |   |  | \\  ___/\\  ___/  |  |   /    Y    \\    |  / |    `   \\   |  | ");
+			System.out.println(" \\___  >____/|__|   |__|  \\___  >\\___  > |  |_  \\____|__  /______/ /_______  /  _|  | ");
+			System.out.println("     \\/                       \\/     \\/  |____|         \\/      v0.2b      \\/  |____| ");
+			System.out.println("\n");
+		}
+		else if (getHoliday() == 1)
+		{
+			// draw spoopy halloween banner
+			System.out.println("\n");
+			System.out.println(" ▄████▄   ▒█████    █████▒ █████▒▓█████ ▓█████  ███▄ ▄███▓ █    ██ ▓█████▄ ");
+			System.out.println("▒██▀ ▀█  ▒██▒  ██▒▓██   ▒▓██   ▒ ▓█   ▀ ▓█   ▀ ▓██▒▀█▀ ██▒ ██  ▓██▒▒██▀ ██▌");
+			System.out.println("▒▓█    ▄ ▒██░  ██▒▒████ ░▒████ ░ ▒███   ▒███   ▓██    ▓██░▓██  ▒██░░██   █▌");
+			System.out.println("▒▓▓▄ ▄██▒▒██   ██░░▓█▒  ░░▓█▒  ░ ▒▓█  ▄ ▒▓█  ▄ ▒██    ▒██ ▓▓█  ░██░░▓█▄   ▌");
+			System.out.println("▒ ▓███▀ ░░ ████▓▒░░▒█░   ░▒█░    ░▒████▒░▒████▒▒██▒   ░██▒▒▒█████▓ ░▒████▓ ");
+			System.out.println("░ ░▒ ▒  ░░ ▒░▒░▒░  ▒ ░    ▒ ░    ░░ ▒░ ░░░ ▒░ ░░ ▒░   ░  ░░▒▓▒ 0.2b  ▒▒▓  ▒ ");
+			System.out.println("  ░  ▒     ░ ▒ ▒░  ░ [HAPPY░HALLOWEEN!]  ░ ░ ░  ░░  ░      ░░░▒░ ░ ░  ░ ▒  ▒ ");
+			System.out.println("░        ░ ░ ░ ▒   ░ ░    ░ ░       ░      ░   ░      ░    ░░░ ░ ░  ░ ░  ░ ");
+			System.out.println("░ ░          ░ ░                    ░  ░   ░  ░       ░      ░        ░    ");
+			System.out.println("░                                                                   ░   ");
+			System.out.println("\n");
+		}
+		else if (getHoliday() == 2)
+		{
+			System.out.println("\n");
+			System.out.println("   ,--.\n" + 
+					"  ()   \\\n" + 
+					"   /    \\\n" + 
+					" _/______\\_               ___   ___               ____ _______ _______ _____ ____ \n" + 
+					"(__________) .----.-----.'  _|.'  _|.-----.-----.|   _|   |   |   |   |     \\_   | \n" + 
+					"(/  @  @  \\) |  __|  _  |   _||   _||  -__|  -__||  | |       |   |   |  --  ||  |\n" + 
+					"(`._,()._,') |____|_____|__|  |__|  |_____|_____||  |_|__|_|__|_______|_____/_|  |\n" + 
+					"(  `-'`-'  )                                     |____|      v0.2b          |____|\n" + 
+					" \\        /\n" + 
+					"  \\,,,,,,/                                              ░      ");
+			System.out.println("\n");
+		}
 		System.out.println("Try connecting to a server with the command: connect <serverIP> <serverport>");
 		System.out.println("Example command: \" connect furrymuck.com 8888 \" or \" connect batmud.bat.org 23 \"");
 		System.out.println("\n\n Please enter a command. \n\n");
@@ -541,5 +577,28 @@ public class Runner
 			System.err.println("addFavorite encountered an exception: " + e);
 			e.printStackTrace();
 		}
+	}
+	public static int getHoliday()
+	{
+		/**
+		 * returns current holiday, if any.
+		 * 0 = no holiday
+		 * 1 = halloween
+		 * 2 = christmas
+		 */
+		Calendar cal = Calendar.getInstance(); 
+		cal.setTimeInMillis((long) clock.getTime() * 1000) ; 
+		int month = cal.get(Calendar.MONTH) + 1; 
+		int date = cal.get(Calendar.DAY_OF_MONTH);
+		// System.out.println(month + " " + date);
+		if (month == 10 && date == 31)
+		{
+			return 1;
+		}
+		else if (month == 12 && (date == 24 || date == 25))
+		{
+			return 2;
+		}
+		return 0;
 	}
 }
