@@ -51,18 +51,19 @@ public class ServerRunner
 	BufferedWriter bw;
 	DataOutputStream out;
 	Stopwatch clock;
+	Defibrillator antiafk;
 	ArrayList<String> macros = new ArrayList<>();
 	public ServerRunner(Stopwatch clock)
 	{
 		// Auto-generated class constructor
 		this.clock = clock;
-		startTime = clock.getTime();
 		getHIDInput = new Scanner(System.in);
 	}
 	public boolean connect(String ip, int port)
 	{
 		try 
 		{
+			startTime = clock.getTime();
 			clientSock = new Socket(ip, port);
 			System.out.println("Connected to " + ip + " in " + (clock.getTime() - startTime) + "s");
 			tty = new remoteTTY(clientSock);
@@ -92,6 +93,18 @@ public class ServerRunner
 	{
 		System.out.println("Beginning communications with server...");
 		bw = new BufferedWriter(new OutputStreamWriter(clientSock.getOutputStream()));
+		antiafk = new Defibrillator(bw);
+		 Thread getantiafk = new Thread(new Runnable() {
+	         public void run() {
+	              try {
+					antiafk.run();
+				} catch (IOException | InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	         }
+	    });  
+	    getantiafk.start();
 		for(;;)
 		{
 			try
@@ -134,6 +147,10 @@ public class ServerRunner
 					System.out.println("Uptime : " + getDaysU + " d " + getHoursU + " hrs " + getMinsU + " mins " + getSecsU + " sec");
 					System.out.println("Moves  : " + commands);
 					System.out.println("========[ End of stats page ]========");
+				}
+				else if (s.contains("!antiafk"))
+				{
+					antiafk.toggle();
 				}
 				else if (s.contains("!pizza"))
 				{
@@ -297,6 +314,7 @@ public class ServerRunner
 									bw.write(s);
 									bw.newLine();
 									bw.flush();
+									commands++;
 									}	
 								}
 							}

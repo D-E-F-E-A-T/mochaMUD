@@ -50,7 +50,7 @@ public class Runner
 	{
 		clock = new Stopwatch();
 		sr = new ServerRunner(clock);
-		System.out.println("Welcome to coffee{MUD} v0.1 by Victor Du");
+		System.out.println("Welcome to coffee{MUD} v0.1 (C) Victor Du");
 		System.out.println("This software is open source and freely redistributable.");
 		System.out.println("\n");
 		System.out.println("              _____  _____               .____     _____   ____ ___________     ____. ");
@@ -231,6 +231,7 @@ public class Runner
 					System.out.println("resume");
 					System.out.println("pizza");
 					System.out.println("!pizza");
+					System.out.println("antiafk");
 					System.out.println("exit");
 					System.out.println("        [ END LIST OF COMMANDS ]        ");
 					System.out.println("==========[ End of help page ]=========");
@@ -364,6 +365,17 @@ public class Runner
 					System.out.println("usage : !disconnect");
 					System.out.println("DESCRIPTION");
 					System.out.println("This command disconnects you from the MUD server and points you back to the LOCAL menu.");
+					System.out.println("==========[ End of help page ]=========");
+				}
+				if (option.contains("antiafk"))
+				{
+					System.out.println("========[ coffee{MUD} help page ]========");
+					System.out.println("NAME");
+					System.out.println("!antiafk - prevent getting kicked for AFK");
+					System.out.println("SYNOPSIS");
+					System.out.println("usage : !antiafk");
+					System.out.println("DESCRIPTION");
+					System.out.println("This command will prevent you from being kicked for inactivity. It sends a keep-alive message every 5 minutes.");
 					System.out.println("==========[ End of help page ]=========");
 				}
 				if (option.contains("exit"))
