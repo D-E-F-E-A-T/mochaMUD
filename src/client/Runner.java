@@ -145,7 +145,7 @@ public class Runner
 			}
 			if (input.matches("time"))
 			{
-				System.out.println("========[ tiny{MUD} time page ]========");
+				System.out.println("========[ coffee{MUD} time page ]========");
 				double seconds = clock.getTime();
 				int getDays = (int) (seconds / 60 / 60 / 24);
 				int getHours = (int) ((seconds/60/60)%24);
@@ -165,7 +165,7 @@ public class Runner
 			{
 				if (sr.isRun)
 				{
-					System.out.println("========[ tiny{MUD} stats page ]========");
+					System.out.println("========[ coffee{MUD} stats page ]========");
 					double uptime = clock.elapsedTime();
 					int getDaysU = (int) (uptime / 60 / 60 / 24);
 					int getHoursU = (int) ((uptime/60/60)%24);
@@ -173,6 +173,7 @@ public class Runner
 					int getSecsU = (int) (uptime % 60);
 					System.out.println("IP     : " + sr.clientSock.getRemoteSocketAddress());
 					System.out.println("Port   : " + sr.clientSock.getPort());
+					System.out.println("MCP v. : " + sr.tty.mcpVer);
 					System.out.println("Uptime : " + getDaysU + " d " + getHoursU + " hrs " + getMinsU + " mins " + getSecsU + " sec");
 					System.out.println("Moves  : " + sr.commands);
 					System.out.println("========[ End of stats page ]========");
@@ -215,7 +216,7 @@ public class Runner
 				System.out.println(option);
 				if (option.matches(""))
 				{
-					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("========[ coffee{MUD} help page ]========");
 					System.out.println("help - usage : help [command]");
 					System.out.println("        [  LIST OF COMMANDS   ]        ");
 					System.out.println("help");
@@ -236,7 +237,7 @@ public class Runner
 				}
 				if (option.contains("help"))
 				{
-					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("========[ coffee{MUD} help page ]========");
 					System.out.println("NAME");
 					System.out.println("help - a command to run for help on a command.");
 					System.out.println("SYNOPSIS");
@@ -245,7 +246,7 @@ public class Runner
 				}
 				if (option.contains("goto"))
 				{
-					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("========[ coffee{MUD} help page ]========");
 					System.out.println("NAME");
 					System.out.println("goto - connect to a saved server");
 					System.out.println("SYNOPSIS");
@@ -256,7 +257,7 @@ public class Runner
 				}
 				if (option.contains("delserv"))
 				{
-					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("========[ coffee{MUD} help page ]========");
 					System.out.println("NAME");
 					System.out.println("delserv - delete a saved server");
 					System.out.println("SYNOPSIS");
@@ -267,7 +268,7 @@ public class Runner
 				}
 				if (option.contains("connect"))
 				{
-					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("========[ coffee{MUD} help page ]========");
 					System.out.println("NAME");
 					System.out.println("connect - connect to a MUD server.");
 					System.out.println("SYNOPSIS");
@@ -277,9 +278,9 @@ public class Runner
 					System.out.println("example : \" connect furrymuck.com 8888 \"");
 					System.out.println("==========[ End of help page ]=========");
 				}
-				if (option.matches("time"))
+				if (option.contains("time"))
 				{
-					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("========[ coffee{MUD} help page ]========");
 					System.out.println("NAME");
 					System.out.println("time - show uptime of program");
 					System.out.println("SYNOPSIS");
@@ -288,9 +289,9 @@ public class Runner
 					System.out.println("This command shows the amount of time coffee{MUD} has been running for, as well as\n the current UTC time.");
 					System.out.println("==========[ End of help page ]=========");
 				}
-				if (option.matches("resume"))
+				if (option.contains("resume"))
 				{
-					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("========[ coffee{MUD} help page ]========");
 					System.out.println("NAME");
 					System.out.println("resume - resume a paused game");
 					System.out.println("SYNOPSIS");
@@ -299,9 +300,9 @@ public class Runner
 					System.out.println("This command will resume a previously paused game in coffee{MUD}.");
 					System.out.println("==========[ End of help page ]=========");
 				}
-				if (option.matches("stats"))
+				if (option.contains("stats"))
 				{
-					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("========[ coffee{MUD} help page ]========");
 					System.out.println("NAME");
 					System.out.println("stats - show statistics of current game");
 					System.out.println("SYNOPSIS");
@@ -310,9 +311,9 @@ public class Runner
 					System.out.println("This command shows various user/client-side statistics for cofffee{MUD}. This includes the uptime of coffee{MUD}, commands run\n and current server.");
 					System.out.println("==========[ End of help page ]=========");
 				}
-				if (option.matches("dice"))
+				if (option.contains("dice"))
 				{
-					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("========[ coffee{MUD} help page ]========");
 					System.out.println("NAME");
 					System.out.println("!dice - roll a pair of virtual dice");
 					System.out.println("SYNOPSIS");
@@ -323,7 +324,7 @@ public class Runner
 				}
 				if (option.contains("pizza"))
 				{
-					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("========[ coffee{MUD} help page ]========");
 					System.out.println("NAME");
 					System.out.println("pizza - order pizza mid-game");
 					System.out.println("SYNOPSIS");
@@ -334,7 +335,7 @@ public class Runner
 				}
 				if (option.contains("pause"))
 				{
-					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("========[ coffee{MUD} help page ]========");
 					System.out.println("NAME");
 					System.out.println("!pause - pause your MUD session");
 					System.out.println("SYNOPSIS");
@@ -345,7 +346,7 @@ public class Runner
 				}
 				if (option.contains("clear"))
 				{
-					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("========[ coffee{MUD} help page ]========");
 					System.out.println("NAME");
 					System.out.println("!clear - clear screen");
 					System.out.println("SYNOPSIS");
@@ -356,7 +357,7 @@ public class Runner
 				}
 				if (option.contains("disconnect"))
 				{
-					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("========[ coffee{MUD} help page ]========");
 					System.out.println("NAME");
 					System.out.println("!disconnect - disconnect from the MUD server.");
 					System.out.println("SYNOPSIS");
@@ -367,7 +368,7 @@ public class Runner
 				}
 				if (option.contains("exit"))
 				{
-					System.out.println("========[ tiny{MUD} help page ]========");
+					System.out.println("========[ coffee{MUD} help page ]========");
 					System.out.println("NAME");
 					System.out.println("exit - close tiny{MUD}");
 					System.out.println("SYNOPSIS");

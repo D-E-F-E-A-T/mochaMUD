@@ -18,11 +18,33 @@ import java.util.StringTokenizer;
 
 public class ServerRunner
 {
+	/**
+	 * 
+	 *  Copyright (c) 2017 _c0da_ (Victor Du)
+	 *
+	 *	Permission is hereby granted, free of charge, to any person obtaining a copy
+	 *	of this software and associated documentation files (the "Software"), to deal
+	 *	in the Software without restriction, including without limitation the rights
+	 *	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	 *	copies of the Software, and to permit persons to whom the Software is
+	 *	furnished to do so, subject to the following conditions:
+	 *  
+	 *	The above copyright notice and this permission notice shall be included in all
+	 *	copies or substantial portions of the Software.
+	 *
+	 *	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	 *	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	 *	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	 *	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	 *	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	 *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	 *	SOFTWARE.
+	 */
+	
 	static Socket clientSock;
 	static Scanner getHIDInput;
 	static remoteTTY tty;
 	static double startTime;
-	static double mLoadTime;
 	static boolean isRun = false;
 	// PrintWriter pw;
 	static int commands = 0;
@@ -34,7 +56,7 @@ public class ServerRunner
 	{
 		// Auto-generated class constructor
 		this.clock = clock;
-		startTime = clock.elapsedTime();
+		startTime = clock.getTime();
 		getHIDInput = new Scanner(System.in);
 	}
 	public boolean connect(String ip, int port)
@@ -42,7 +64,7 @@ public class ServerRunner
 		try 
 		{
 			clientSock = new Socket(ip, port);
-			System.out.println("Connected to " + ip + " in " + (clock.elapsedTime() - startTime) + "s");
+			System.out.println("Connected to " + ip + " in " + (clock.getTime() - startTime) + "s");
 			tty = new remoteTTY(clientSock);
 		    Thread getinputstm = new Thread(new Runnable() {
 		         public void run() {
@@ -55,7 +77,7 @@ public class ServerRunner
 		         }
 		    });  
 		    getinputstm.start();
-		    System.out.println("Loaded modules in " + (clock.elapsedTime() - startTime) + "s");
+		    System.out.println("Loaded modules in " + (clock.getTime() - startTime) + "s");
 		    isRun = true;
 			return true;
 		}
@@ -82,6 +104,7 @@ public class ServerRunner
 				}
 				else if (s.contains("!time"))
 				{
+					System.out.println("========[ coffee{MUD} time page ]========");
 					double seconds = clock.getTime();
 					int getDays = (int) (seconds / 60 / 60 / 24);
 					int getHours = (int) ((seconds/60/60)%24);
@@ -95,10 +118,11 @@ public class ServerRunner
 					int getMinsU = (int) ((uptime / 60)%60);
 					int getSecsU = (int) (uptime % 60);
 					System.out.println("Uptime: " + getDaysU + " d " + getHoursU + " hrs " + getMinsU + " mins " + getSecsU + " sec");
+					System.out.println("========[ End of time page ]========");
 				}
 				else if (s.contains("!stats"))
 				{
-					System.out.println("========[ tiny{MUD} stats page ]========");
+					System.out.println("========[ coffee{MUD} stats page ]========");
 					double uptime = clock.elapsedTime();
 					int getDaysU = (int) (uptime / 60 / 60 / 24);
 					int getHoursU = (int) ((uptime/60/60)%24);
@@ -106,6 +130,7 @@ public class ServerRunner
 					int getSecsU = (int) (uptime % 60);
 					System.out.println("IP     : " + clientSock.getRemoteSocketAddress());
 					System.out.println("Port   : " + clientSock.getPort());
+					System.out.println("MCP v. : " + tty.mcpVer);
 					System.out.println("Uptime : " + getDaysU + " d " + getHoursU + " hrs " + getMinsU + " mins " + getSecsU + " sec");
 					System.out.println("Moves  : " + commands);
 					System.out.println("========[ End of stats page ]========");
@@ -226,50 +251,53 @@ public class ServerRunner
 						for(;;)
 						{
 							s = br.readLine();
-							// System.out.println(s);
-							if (s.contains("&delay"))
+							if (!s.substring(0, 2).matches("#"))
 							{
-								StringTokenizer parser = new StringTokenizer(s);
-								parser.nextToken();
-								String delayTString = parser.nextToken();
-								try
+								// System.out.println(s);
+								if (s.contains("&delay"))
 								{
-									int tempDelay = Integer.parseInt(delayTString);
-									System.out.println("Delaying " + tempDelay + " ms");
-									Thread.sleep(tempDelay);
-								} 
-								catch (Exception e)
-								{
-									System.err.println("Couldn't parse delay from macro file.");
+									StringTokenizer parser = new StringTokenizer(s);
+									parser.nextToken();
+									String delayTString = parser.nextToken();
+									try
+									{
+										int tempDelay = Integer.parseInt(delayTString);
+										System.out.println("Delaying " + tempDelay + " ms");
+										Thread.sleep(tempDelay);
+									} 
+									catch (Exception e)
+									{
+										System.err.println("Couldn't parse delay from macro file.");
+									}
 								}
-							}
-							else if (s.contains("&print"))
-							{
-								StringTokenizer parser = new StringTokenizer(s);
-								parser.nextToken();
-								String toPrint = parser.nextToken();
-								System.out.println(toPrint);
-							}
-							else if (s.contains("&disconnect"))
-							{
-								tty.isclosed = true;
-								tty.clientSock.close();
-								clientSock.close();
-								disconnectInMacro = true;
-								break;
-							}
-							else
-							{
-								if (s == null || s.contains("["))
+								else if (s.contains("&print"))
 								{
-									ff = true;
+									StringTokenizer parser = new StringTokenizer(s);
+									parser.nextToken();
+									String toPrint = parser.nextToken();
+									System.out.println(toPrint);
+								}
+								else if (s.contains("&disconnect"))
+								{
+									tty.isclosed = true;
+									tty.clientSock.close();
+									clientSock.close();
+									disconnectInMacro = true;
 									break;
 								}
 								else
-								{	
+								{
+									if (s == null || s.contains("["))
+									{
+										ff = true;
+										break;
+									}
+									else
+									{	
 									bw.write(s);
 									bw.newLine();
 									bw.flush();
+									}	
 								}
 							}
 						}
