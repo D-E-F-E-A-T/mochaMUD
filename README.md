@@ -1,14 +1,18 @@
-# coffeeMUD
+# mochaMUD
 A tiny JAVA-based TinyMU* client
 
+# Disclaimer
+This program is not affiliated with Bo Zimmerman's coffeeMUD program whatsoever. I had no idea about Zimmerman's coffeeMUD. If you are here for Zimmerman's project, here's the URL.
+https://github.com/bozimmerman/CoffeeMud
+
 # Description
-coffeeMUD is a lightweight, fast TinyMUD client writen in JAVA. Using coffeeMUD, you can connect to MUD servers, and have an enhanced experience with more features than your average telnet.
+mochaMUD is a lightweight, fast TinyMUD client writen in JAVA. Using mochaMUD, you can connect to MUD servers, and have an enhanced experience with more features than your average telnet.
 
 # Status
-coffeeMUD is still in beta. Most features work, but there may be formatting issues here and there. There will be more features to come, such as auto-login features.
+mochaMUD is still in beta. Most features work, but there may be formatting issues here and there. There will be more features to come, such as auto-login features.
 
 # Features
-coffeeMUD has a variety of features to enhance your MUD experience. Features include:
+mochaMUD has a variety of features to enhance your MUD experience. Features include:
 - Programmable macro commands
 - Saved favorite servers
 - Dice rolling in-game
@@ -18,7 +22,7 @@ coffeeMUD has a variety of features to enhance your MUD experience. Features inc
 - Support for special characters, such as Simplified Chinese.
 - Fast as lightening!
 - Multi-platform support (Windows, Mac OS X, Linux)
-- Order pizza from coffeeMUD!
+- Order pizza from mochaMUD!
 
 # License
 Copyright (c) 2017 _c0da_ (Victor Du)
