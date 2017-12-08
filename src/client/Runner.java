@@ -1,9 +1,7 @@
 package client;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -46,6 +44,7 @@ public class Runner
 	static Stopwatch clock;
 	static Scanner lc;
 	static ArrayList<String> favorites = new ArrayList<String>();
+	static int lockCode = 000000;
 	@SuppressWarnings("static-access")
 	public static void main (String[] args)
 	{
@@ -230,6 +229,19 @@ public class Runner
 					e.printStackTrace();
 				}
 			}
+			if (input.contains("lock"))
+			{
+				String option = input.substring(5);
+				try
+				{
+					lockCode = Integer.parseInt(option);
+					lock();
+				}
+				catch (Exception e)
+				{
+					System.err.println("Couldn't parse lock password: " + e);
+				}
+			}
 			if (input.matches("resume"))
 			{
 				if (sr.isRun)
@@ -412,6 +424,17 @@ public class Runner
 					System.out.println("usage : !antiafk");
 					System.out.println("DESCRIPTION");
 					System.out.println("This command will prevent you from being kicked for inactivity. It sends a keep-alive message every 5 minutes.");
+					System.out.println("==========[ End of help page ]=========");
+				}
+				if (option.contains("lock"))
+				{
+					System.out.println("========[ coffee{MUD} help page ]========");
+					System.out.println("NAME");
+					System.out.println("lock - lock coffee{MUD} during pause");
+					System.out.println("SYNOPSIS");
+					System.out.println("usage : lock [passcode]");
+					System.out.println("DESCRIPTION");
+					System.out.println("This command locks coffee{MUD}, requiring an n-digit code to unlock.");
 					System.out.println("==========[ End of help page ]=========");
 				}
 				if (option.contains("exit"))
@@ -600,5 +623,35 @@ public class Runner
 			return 2;
 		}
 		return 0;
+	}
+	public static void lock()
+	{
+		for (int i = 0; i < 69; i++)
+		{
+			System.out.println("\n");
+		}
+		for(;;)
+		{
+			System.out.println("coffee{MUD} is locked");
+			System.out.println("Enter passcode to unlock.");
+			String inpass = lc.nextLine();
+			try
+			{
+				int key = Integer.parseInt(inpass);
+				if (lockCode == key)
+				{
+					System.out.println("Unlocked coffee{MUD}.");
+					break;
+				}
+				else
+				{
+					System.err.println("Password is not correct.");
+				}
+			}
+			catch (Exception e)
+			{
+				System.err.println("Could not parse passcode: " + e);
+			}
+		}
 	}
 }
