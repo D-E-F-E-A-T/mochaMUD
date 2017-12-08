@@ -9,7 +9,6 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -43,7 +42,7 @@ public class Runner
 	static ServerRunner sr;
 	static Stopwatch clock;
 	static Scanner lc;
-	static ArrayList<String> favorites = new ArrayList<String>();
+	static List<String> favorites = new ArrayList<String>();
 	static int lockCode = 000000;
 	@SuppressWarnings("static-access")
 	public static void main (String[] args)
@@ -165,9 +164,6 @@ public class Runner
 				int id = Integer.parseInt(st.nextToken());
 				if (!(id >= favorites.size()))
 				{
-					StringTokenizer st2 = new StringTokenizer(favorites.get(id));
-					String ip = st2.nextToken();
-					int port = Integer.parseInt(st2.nextToken());
 					favorites.remove(id);
 				}
 			}
@@ -231,9 +227,9 @@ public class Runner
 			}
 			if (input.contains("lock"))
 			{
-				String option = input.substring(5);
 				try
 				{
+					String option = input.substring(5);
 					lockCode = Integer.parseInt(option);
 					lock();
 				}
@@ -550,7 +546,6 @@ public class Runner
 	public static void loadFavorites() throws UnsupportedEncodingException, IOException
 	{
 		String path = Runner.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-		String decodedPath = URLDecoder.decode(path, "UTF-8");
 		File f = new File(path + "favorites.ini");
 		if (!f.exists())
 		{
@@ -586,7 +581,6 @@ public class Runner
 		try
 		{
 			String path = Runner.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-			String decodedPath = URLDecoder.decode(path, "UTF-8");
 			PrintWriter pw = new PrintWriter(new FileWriter(path + "favorites.ini", true));
 			if (!favorites.contains(ip + " " + port))
 			{

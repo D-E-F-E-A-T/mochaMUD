@@ -52,6 +52,7 @@ public class ServerRunner
 	Stopwatch clock;
 	Defibrillator antiafk;
 	ArrayList<String> macros = new ArrayList<>();
+	BufferedReader br;
 	public ServerRunner(Stopwatch clock)
 	{
 		// Auto-generated class constructor
@@ -248,7 +249,7 @@ public class ServerRunner
 			}
 			boolean ff = false;
 			boolean disconnectInMacro = false;
-			BufferedReader br = new BufferedReader(new FileReader(decodedPath + "coffeeMacros.ini"));
+			br = new BufferedReader(new FileReader(decodedPath + "coffeeMacros.ini"));
 			for(;;)
 			{
 				if (ff)
