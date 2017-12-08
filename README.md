@@ -2,7 +2,7 @@
 A tiny JAVA-based TinyMU* client
 
 # Disclaimer
-This program is not affiliated with Bo Zimmerman's coffeeMUD program whatsoever. I had no idea about Zimmerman's coffeeMUD. If you are here for Zimmerman's project, here's the URL.
+This program is not affiliated with Bo Zimmerman's coffeeMUD program whatsoever. I had no idea about Zimmerman's coffeeMUD at the time (please don't sue me). If you are here for Zimmerman's project, here's the URL. It's actually pretty good, you should check it out.
 https://github.com/bozimmerman/CoffeeMud
 
 # Description
