@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 if [[ $EUID -ne 0 ]]; then
    echo "Please run the coffee{MUD} installer as root." 
    exit 1
