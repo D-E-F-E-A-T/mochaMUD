@@ -276,6 +276,8 @@ public class Runner
 					System.out.println("pizza");
 					System.out.println("!pizza");
 					System.out.println("antiafk");
+					System.out.println("macro");
+					System.out.println("!macro");
 					System.out.println("exit");
 					System.out.println("        [ END LIST OF COMMANDS ]        ");
 					System.out.println("==========[ End of help page ]=========");
@@ -431,6 +433,17 @@ public class Runner
 					System.out.println("usage : lock [passcode]");
 					System.out.println("DESCRIPTION");
 					System.out.println("This command locks coffee{MUD}, requiring an n-digit code to unlock.");
+					System.out.println("==========[ End of help page ]=========");
+				}
+				if (option.contains("macro"))
+				{
+					System.out.println("========[ coffee{MUD} help page ]========");
+					System.out.println("NAME");
+					System.out.println("macro - summon a macro");
+					System.out.println("SYNOPSIS");
+					System.out.println("usage : macro [macro ID]");
+					System.out.println("DESCRIPTION");
+					System.out.println("This command summons a user-defined macro defined in macros.ini.");
 					System.out.println("==========[ End of help page ]=========");
 				}
 				if (option.contains("exit"))

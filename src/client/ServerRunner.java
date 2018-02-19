@@ -185,6 +185,212 @@ public class ServerRunner
 						loadMacros(id);
 					}
 				}
+				else if (s.contains("!help"))
+				{
+					String option = s.substring(4);
+					System.out.println(option);
+					if (option.matches(""))
+					{
+						System.out.println("========[ coffee{MUD} help page ]========");
+						System.out.println("help - usage : help [command]");
+						System.out.println("        [  LIST OF COMMANDS   ]        ");
+						System.out.println("help");
+						System.out.println("connect");
+						System.out.println("goto");
+						System.out.println("delserv");
+						System.out.println("clear");
+						System.out.println("stats");
+						System.out.println("time");
+						System.out.println("!pause");
+						System.out.println("!disconnect");
+						System.out.println("resume");
+						System.out.println("pizza");
+						System.out.println("!pizza");
+						System.out.println("antiafk");
+						System.out.println("macro");
+						System.out.println("!macro");
+						System.out.println("exit");
+						System.out.println("        [ END LIST OF COMMANDS ]        ");
+						System.out.println("==========[ End of help page ]=========");
+					}
+					if (option.contains("help"))
+					{
+						System.out.println("========[ coffee{MUD} help page ]========");
+						System.out.println("NAME");
+						System.out.println("help - a command to run for help on a command.");
+						System.out.println("SYNOPSIS");
+						System.out.println("help [command]");
+						System.out.println("==========[ End of help page ]=========");
+					}
+					if (option.contains("goto"))
+					{
+						System.out.println("========[ coffee{MUD} help page ]========");
+						System.out.println("NAME");
+						System.out.println("goto - connect to a saved server");
+						System.out.println("SYNOPSIS");
+						System.out.println("goto [server ID]");
+						System.out.println("DESCRIPTION");
+						System.out.println("This command connects to a specified MUD server with a set ID.");
+						System.out.println("==========[ End of help page ]=========");
+					}
+					if (option.contains("delserv"))
+					{
+						System.out.println("========[ coffee{MUD} help page ]========");
+						System.out.println("NAME");
+						System.out.println("delserv - delete a saved server");
+						System.out.println("SYNOPSIS");
+						System.out.println("delserv [server ID]");
+						System.out.println("DESCRIPTION");
+						System.out.println("This command deletes a saved MUD server on tiny{MUD}.");
+						System.out.println("==========[ End of help page ]=========");
+					}
+					if (option.contains("connect"))
+					{
+						System.out.println("========[ coffee{MUD} help page ]========");
+						System.out.println("NAME");
+						System.out.println("connect - connect to a MUD server.");
+						System.out.println("SYNOPSIS");
+						System.out.println("connect [IP of server] [port of server]");
+						System.out.println("DESCRIPTION");
+						System.out.println("This command connects to a MU* server. The server IP field supports IPv4 and IPv6 and the port supports TLS tunneling.");
+						System.out.println("example : \" connect furrymuck.com 8888 \"");
+						System.out.println("==========[ End of help page ]=========");
+					}
+					if (option.contains("time"))
+					{
+						System.out.println("========[ coffee{MUD} help page ]========");
+						System.out.println("NAME");
+						System.out.println("time - show uptime of program");
+						System.out.println("SYNOPSIS");
+						System.out.println("usage : time");
+						System.out.println("DESCRIPTION");
+						System.out.println("This command shows the amount of time coffee{MUD} has been running for, as well as\n the current UTC time.");
+						System.out.println("==========[ End of help page ]=========");
+					}
+					if (option.contains("resume"))
+					{
+						System.out.println("========[ coffee{MUD} help page ]========");
+						System.out.println("NAME");
+						System.out.println("resume - resume a paused game");
+						System.out.println("SYNOPSIS");
+						System.out.println("usage : resume");
+						System.out.println("DESCRIPTION");
+						System.out.println("This command will resume a previously paused game in coffee{MUD}.");
+						System.out.println("==========[ End of help page ]=========");
+					}
+					if (option.contains("stats"))
+					{
+						System.out.println("========[ coffee{MUD} help page ]========");
+						System.out.println("NAME");
+						System.out.println("stats - show statistics of current game");
+						System.out.println("SYNOPSIS");
+						System.out.println("usage : stats");
+						System.out.println("DESCRIPTION");
+						System.out.println("This command shows various user/client-side statistics for cofffee{MUD}. This includes the uptime of coffee{MUD}, commands run\n and current server.");
+						System.out.println("==========[ End of help page ]=========");
+					}
+					if (option.contains("dice"))
+					{
+						System.out.println("========[ coffee{MUD} help page ]========");
+						System.out.println("NAME");
+						System.out.println("!dice - roll a pair of virtual dice");
+						System.out.println("SYNOPSIS");
+						System.out.println("usage : !dice");
+						System.out.println("DESCRIPTION");
+						System.out.println("This command rolls multiple dice: a D2, D6, D10 and D20.");
+						System.out.println("==========[ End of help page ]=========");
+					}
+					if (option.contains("pizza"))
+					{
+						System.out.println("========[ coffee{MUD} help page ]========");
+						System.out.println("NAME");
+						System.out.println("pizza - order pizza mid-game");
+						System.out.println("SYNOPSIS");
+						System.out.println("usage : pizza");
+						System.out.println("DESCRIPTION");
+						System.out.println("This command opens an ordering menu for Domino's pizza, so you can order pizza for pick-up.");
+						System.out.println("==========[ End of help page ]=========");
+					}
+					if (option.contains("pause"))
+					{
+						System.out.println("========[ coffee{MUD} help page ]========");
+						System.out.println("NAME");
+						System.out.println("!pause - pause your MUD session");
+						System.out.println("SYNOPSIS");
+						System.out.println("usage : !pause");
+						System.out.println("DESCRIPTION");
+						System.out.println("This command pauses your game, not disconnecting and points you back to the LOCAL menu.");
+						System.out.println("==========[ End of help page ]=========");
+					}
+					if (option.contains("clear"))
+					{
+						System.out.println("========[ coffee{MUD} help page ]========");
+						System.out.println("NAME");
+						System.out.println("!clear - clear screen");
+						System.out.println("SYNOPSIS");
+						System.out.println("usage : !clear");
+						System.out.println("DESCRIPTION");
+						System.out.println("This command clears your screen.");
+						System.out.println("==========[ End of help page ]=========");
+					}
+					if (option.contains("disconnect"))
+					{
+						System.out.println("========[ coffee{MUD} help page ]========");
+						System.out.println("NAME");
+						System.out.println("!disconnect - disconnect from the MUD server.");
+						System.out.println("SYNOPSIS");
+						System.out.println("usage : !disconnect");
+						System.out.println("DESCRIPTION");
+						System.out.println("This command disconnects you from the MUD server and points you back to the LOCAL menu.");
+						System.out.println("==========[ End of help page ]=========");
+					}
+					if (option.contains("antiafk"))
+					{
+						System.out.println("========[ coffee{MUD} help page ]========");
+						System.out.println("NAME");
+						System.out.println("!antiafk - prevent getting kicked for AFK");
+						System.out.println("SYNOPSIS");
+						System.out.println("usage : !antiafk");
+						System.out.println("DESCRIPTION");
+						System.out.println("This command will prevent you from being kicked for inactivity. It sends a keep-alive message every 5 minutes.");
+						System.out.println("==========[ End of help page ]=========");
+					}
+					if (option.contains("lock"))
+					{
+						System.out.println("========[ coffee{MUD} help page ]========");
+						System.out.println("NAME");
+						System.out.println("lock - lock coffee{MUD} during pause");
+						System.out.println("SYNOPSIS");
+						System.out.println("usage : lock [passcode]");
+						System.out.println("DESCRIPTION");
+						System.out.println("This command locks coffee{MUD}, requiring an n-digit code to unlock.");
+						System.out.println("==========[ End of help page ]=========");
+					}
+					if (option.contains("macro"))
+					{
+						System.out.println("========[ coffee{MUD} help page ]========");
+						System.out.println("NAME");
+						System.out.println("macro - summon a macro");
+						System.out.println("SYNOPSIS");
+						System.out.println("usage : macro [macro ID]");
+						System.out.println("DESCRIPTION");
+						System.out.println("This command summons a user-defined macro defined in macros.ini.");
+						System.out.println("==========[ End of help page ]=========");
+					}
+					if (option.contains("exit"))
+					{
+						System.out.println("========[ coffee{MUD} help page ]========");
+						System.out.println("NAME");
+						System.out.println("exit - close tiny{MUD}");
+						System.out.println("SYNOPSIS");
+						System.out.println("usage : exit");
+						System.out.println("DESCRIPTION");
+						System.out.println("This command exits tiny{MUD}.");
+						System.out.println("Examples: ");
+						System.out.println("Is someone hurting your feelings? Use this command to quit the game!");
+						System.out.println("==========[ End of help page ]=========");
+					}
+				}
 				else if (s.contains("!clear"))
 				{
 					for (int i = 0; i < 69; i++)
