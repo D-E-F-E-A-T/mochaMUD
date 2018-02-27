@@ -517,10 +517,10 @@ public class ServerRunner
 									}
 									else
 									{	
-									bw.write(s);
-									bw.newLine();
-									bw.flush();
-									commands++;
+										bw.write(s);
+										bw.newLine();
+										bw.flush();
+										commands++;
 									}	
 								}
 							}
