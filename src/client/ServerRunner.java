@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.URI;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -446,16 +445,15 @@ public class ServerRunner
 		try
 		{
 			System.out.println("Running macro "+ macroID + "...");
-			String path = Runner.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-			String decodedPath = URLDecoder.decode(path, "UTF-8");
-			File f = new File(path + "coffeeMacros.ini");
+			File f = new File("coffeeMacros.ini");
 			if (!f.exists())
 			{
 				f.createNewFile();
+				return;
 			}
 			boolean ff = false;
 			boolean disconnectInMacro = false;
-			br = new BufferedReader(new FileReader(decodedPath + "coffeeMacros.ini"));
+			br = new BufferedReader(new FileReader("coffeeMacros.ini"));
 			for(;;)
 			{
 				if (ff)

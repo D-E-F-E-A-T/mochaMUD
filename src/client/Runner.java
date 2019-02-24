@@ -558,14 +558,14 @@ public class Runner
 	}
 	public static void loadFavorites() throws UnsupportedEncodingException, IOException
 	{
-		String path = Runner.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-		File f = new File(path + "favorites.ini");
+		File f = new File("favorites.ini");
 		if (!f.exists())
 		{
 			f.createNewFile();
+			return;
 		}
-		System.out.println("Loading saved servers from: " + path + "favorites.ini");
-		BufferedReader br = new BufferedReader(new FileReader(path + "favorites.ini"));
+		System.out.println("Loading saved servers from: favorites.ini");
+		BufferedReader br = new BufferedReader(new FileReader("favorites.ini"));
 		for(;;)
 		{
 			String s = br.readLine();
@@ -593,13 +593,23 @@ public class Runner
 	{
 		try
 		{
-			String path = Runner.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-			PrintWriter pw = new PrintWriter(new FileWriter(path + "favorites.ini", true));
+			File file = new File("favorites.ini");
+			if (!file.exists())
+			{
+				file.createNewFile();
+			}
+			PrintWriter pw = new PrintWriter(new FileWriter(file, true));
 			if (!favorites.contains(ip + " " + port))
 			{
 				System.out.println("You haven't visited this server before. Would you like to save it for quick access later? (Y/N)");
 				String ch = lc.nextLine();
-				if (ch.contains("y") || ch.contains("Y")) { favorites.add(ip + " " + port);  pw.println(ip + " " + port); pw.close(); System.out.println("Server saved.");}	
+				if (ch.contains("y") || ch.contains("Y")) 
+				{
+					favorites.add(ip + " " + port);  
+					pw.println(ip + " " + port);
+					pw.close();
+					System.out.println("Server saved.");
+				}	
 			}
 		}
 		catch (Exception e)
